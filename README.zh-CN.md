@@ -115,5 +115,4 @@ Mac Coffee 常驻菜单栏，尽量做到开箱即用：
 
 - [dec0dOS/amazing-github-template](https://github.com/dec0dOS/amazing-github-template)
 - Apple 的 macOS 开发工具与系统框架
-- `AppAssets_2026-04-14.zip` 中提供的图标资源
 - 感谢 [Linux.do](https://linux.do/) 社区的讨论、反馈与早期支持

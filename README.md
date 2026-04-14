@@ -115,5 +115,4 @@ This project is released under the [MIT License](LICENSE).
 
 - [dec0dOS/amazing-github-template](https://github.com/dec0dOS/amazing-github-template)
 - Apple's macOS developer tools and system frameworks
-- The icon assets provided in `AppAssets_2026-04-14.zip`
 - Thanks to the [Linux.do](https://linux.do/) community for feedback, discussion, and early support
