@@ -10,6 +10,12 @@
   A native macOS menu bar app that keeps your Mac awake, restores normal sleep on a schedule, and safely falls back when your Mac switches to battery power.
   <br />
   <br />
+  <div align="center">
+<p align="center">
+  <a href="https://linux.do" alt="LINUX DO">
+    <img src="https://shorturl.at/ggSqS" alt="LINUX DO">
+  </a>
+</p>
   <a href="README.zh-CN.md">中文文档</a>
   ·
   <a href="https://github.com/Elliotwu-7/Mac-Coffee/releases">Download DMG</a>
@@ -20,12 +26,6 @@
 </div>
 
 
-<div align="center">
-<p align="center">
-  <a href="https://linux.do/t/topic/1671489" alt="LINUX DO">
-    <img src="https://shorturl.at/ggSqS" alt="LINUX DO">
-  </a>
-</p>
   <br />
 
 [![Project license](https://img.shields.io/github/license/Elliotwu-7/Mac-Coffee.svg?style=flat-square)](LICENSE)
