@@ -10,6 +10,8 @@
   A native macOS menu bar app for keeping your Mac awake, restoring normal sleep on a schedule, and falling back safely when running on battery.
   <br />
   <br />
+  <a href="README.zh-CN.md">中文文档</a>
+  ·
   <a href="https://github.com/Elliotwu-7/Mac-Coffee/releases">Download DMG</a>
   ·
   <a href="https://github.com/Elliotwu-7/Mac-Coffee/issues/new?assignees=&labels=bug&template=01_BUG_REPORT.md&title=bug%3A+">Report a Bug</a>
@@ -51,6 +53,10 @@
 ## About
 
 Mac Coffee is a native menu bar utility for macOS that lets you switch between a "keep awake" mode and the system's normal sleep behavior without opening Terminal. It is designed for people who occasionally need to prevent clamshell sleep, but still want clear safety rails around timers, battery usage, and login startup.
+
+## Screenshot
+
+![Mac Coffee screenshot](docs/images/screenshot.png)
 
 ### Built With
 

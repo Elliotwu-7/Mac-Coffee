@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-release:
+    name: Build DMG
+    runs-on: macos-14
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build app
+        run: zsh ./build.sh
+
+      - name: Package DMG
+        run: zsh ./package_dmg.sh
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/MacCoffee.dmg
+          generate_release_notes: true
