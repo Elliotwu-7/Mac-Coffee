@@ -24,7 +24,6 @@
     <img src="https://shorturl.at/ggSqS" alt="LINUX DO">
   </a>
 </p>
-
 <div align="center">
 <br />
 
