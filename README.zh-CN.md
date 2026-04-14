@@ -10,6 +10,12 @@
   一个原生 macOS 菜单栏工具，用来保持 Mac 唤醒、按计划恢复正常休眠，并在切到电池供电时自动安全回退。
   <br />
   <br />
+  <div align="center">
+<p align="center">
+  <a href="https://linux.do" alt="LINUX DO">
+    <img src="https://shorturl.at/ggSqS" alt="LINUX DO">
+  </a>
+</p>
   <a href="README.md">English</a>
   ·
   <a href="https://github.com/Elliotwu-7/Mac-Coffee/releases">下载 DMG</a>
