@@ -19,6 +19,12 @@
   <a href="https://github.com/Elliotwu-7/Mac-Coffee/issues/new?assignees=&labels=enhancement&template=02_FEATURE_REQUEST.md&title=feat%3A+">Request a Feature</a>
 </div>
 
+<p align="center">
+  <a href="https://linux.do/t/topic/1671489" alt="LINUX DO">
+    <img src="https://shorturl.at/ggSqS" alt="LINUX DO">
+  </a>
+</p>
+
 <div align="center">
 <br />
 
