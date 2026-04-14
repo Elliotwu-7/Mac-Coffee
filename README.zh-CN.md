@@ -105,4 +105,3 @@ Mac Coffee 常驻在菜单栏，当前版本支持：
 
 - [dec0dOS/amazing-github-template](https://github.com/dec0dOS/amazing-github-template)
 - Apple 的 macOS 开发工具与系统框架
-- `AppAssets_2026-04-14.zip` 中提供的图标资源
