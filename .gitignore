@@ -1,0 +1,5 @@
+.DS_Store
+Mac Coffee.app/
+dist/
+*.dmg
+*.log
