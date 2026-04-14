@@ -7,7 +7,7 @@
 <div align="center">
   Mac Coffee
   <br />
-  一个原生 macOS 菜单栏工具，用来保持 Mac 唤醒、按计划恢复正常休眠，并在切到电池供电时安全回退。
+  一个原生 macOS 菜单栏工具，用来保持 Mac 唤醒、按计划恢复正常休眠，并在切到电池供电时自动安全回退。
   <br />
   <br />
   <a href="README.md">English</a>
@@ -19,9 +19,18 @@
   <a href="https://github.com/Elliotwu-7/Mac-Coffee/issues/new?assignees=&labels=enhancement&template=02_FEATURE_REQUEST.md&title=feat%3A+">功能建议</a>
 </div>
 
+<div align="center">
+<br />
+
+[![项目许可证](https://img.shields.io/github/license/Elliotwu-7/Mac-Coffee.svg?style=flat-square)](LICENSE)
+[![版本](https://img.shields.io/github/v/release/Elliotwu-7/Mac-Coffee?style=flat-square)](https://github.com/Elliotwu-7/Mac-Coffee/releases)
+[![欢迎 PR](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/Elliotwu-7/Mac-Coffee/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+
+</div>
+
 ## 项目简介
 
-Mac Coffee 是一个原生菜单栏应用，帮你在不打开终端的情况下快速切换“保持唤醒”和“恢复正常休眠”。它适合偶尔需要防止合盖休眠的场景，同时提供定时恢复、电池供电自动恢复休眠、登录时启动等安全保护能力。
+Mac Coffee 是一个轻量的原生 macOS 菜单栏应用，让你不用打开终端，也能快速切换“保持唤醒”和“恢复正常休眠”。它面向日常使用场景：操作简单，同时保留定时恢复、电池供电自动恢复休眠、登录时启动等安全保护能力。
 
 ## 运行截图
 
@@ -29,22 +38,29 @@ Mac Coffee 是一个原生菜单栏应用，帮你在不打开终端的情况下
 
 ## 功能特性
 
-- 在菜单栏中一键切换保持唤醒 / 恢复休眠
-- 支持预设时长或指定日期时间后自动恢复休眠
+- 原生菜单栏体验，状态区更紧凑，右键菜单更清爽
+- 一键切换保持唤醒 / 恢复正常休眠
+- 支持预设时长后恢复休眠，也支持指定日期与时间恢复
 - 支持“切到电池供电后立即恢复休眠”
 - 支持登录时启动
-- 首次授权后通过 helper 执行系统休眠设置，避免重复输入密码
+- helper 首次安装授权后，后续切换通常无需重复输入密码
 
 ## 安装
 
-### 通过发行版安装
+### 下载发行版
 
-1. 从最新 release 下载 `MacCoffee.dmg`
+1. 从最新的 [GitHub Release](https://github.com/Elliotwu-7/Mac-Coffee/releases) 下载 `MacCoffee.dmg`
 2. 打开 DMG
 3. 将 `Mac Coffee.app` 拖入 `Applications`
-4. 从 `Applications` 启动
+4. 从 `Applications` 启动应用
 
 ### 从源码构建
+
+环境要求：
+
+- macOS 13 或更高版本
+- Xcode Command Line Tools（`xcode-select --install`）
+- 首次切换时允许管理员授权安装 helper
 
 ```sh
 cd /Users/elliotwu/MacCoffee
@@ -60,42 +76,28 @@ chmod +x build.sh install.sh package_dmg.sh
 open dist/MacCoffee.dmg
 ```
 
-## 环境要求
-
-- macOS 13 或更高版本
-- Xcode Command Line Tools（`xcode-select --install`）
-- 首次切换时允许管理员授权安装 helper
-
 ## 使用说明
 
-Mac Coffee 常驻在菜单栏，当前版本支持：
+Mac Coffee 常驻菜单栏，尽量做到开箱即用：
 
-- 保持唤醒 / 恢复休眠
-- 定时恢复休眠
-- 指定日期时间恢复休眠
-- 电池供电立即恢复休眠
-- 登录时启动
+- 需要保持唤醒时，直接开启 keep-awake 模式
+- 可以选择一个倒计时，或指定某个日期与时间恢复正常休眠
+- 如果你希望拔掉电源后立刻恢复休眠，可以开启电池保护
+- 如果想每次开机都可用，可以打开登录时启动
 
-首次切换时，系统会请求管理员授权安装 helper；安装完成后，后续切换通常不会再次弹出密码框。
+首次切换时，macOS 会请求管理员授权安装 helper。安装完成后，只要 helper 没被移除，后续切换通常不会再次弹出密码框。
 
-## 路线图
+## 自动发布
 
-- 完善 release 自动化，减少手动发布步骤
-- 增加定时完成与电池触发恢复时的本地通知
-- 继续优化不同 Mac 机型上的状态检测与兼容性
-
-## 支持
-
-- 通过 GitHub issue 提交问题或建议
-- 使用 [Elliotwu-7](https://github.com/Elliotwu-7) 主页上的联系方式
+仓库已经包含 GitHub Actions release workflow。以后只要推送类似 `v1.0.1` 的 tag，就会自动构建应用并上传 `MacCoffee.dmg` 到对应 Release。
 
 ## 贡献
 
-欢迎阅读 [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) 后提交 issue 或 pull request。
+欢迎提交 issue、想法和 pull request。如果你想一起完善它，可以先阅读 [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)。
 
 ## 安全
 
-如发现安全问题，请先不要公开披露，参考 [docs/SECURITY.md](docs/SECURITY.md) 中的方式私下联系。
+本项目按开源项目常规方式提供，不附带任何保证。如发现安全问题，请参考 [docs/SECURITY.md](docs/SECURITY.md) 中的方式联系。
 
 ## 许可证
 
@@ -105,3 +107,5 @@ Mac Coffee 常驻在菜单栏，当前版本支持：
 
 - [dec0dOS/amazing-github-template](https://github.com/dec0dOS/amazing-github-template)
 - Apple 的 macOS 开发工具与系统框架
+- `AppAssets_2026-04-14.zip` 中提供的图标资源
+- 感谢 [Linux.do](https://linux.do/) 社区的讨论、反馈与早期支持
