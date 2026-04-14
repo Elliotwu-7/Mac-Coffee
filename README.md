@@ -19,13 +19,14 @@
   <a href="https://github.com/Elliotwu-7/Mac-Coffee/issues/new?assignees=&labels=enhancement&template=02_FEATURE_REQUEST.md&title=feat%3A+">Request a Feature</a>
 </div>
 
+
+<div align="center">
 <p align="center">
   <a href="https://linux.do/t/topic/1671489" alt="LINUX DO">
     <img src="https://shorturl.at/ggSqS" alt="LINUX DO">
   </a>
 </p>
-<div align="center">
-<br />
+  <br />
 
 [![Project license](https://img.shields.io/github/license/Elliotwu-7/Mac-Coffee.svg?style=flat-square)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/Elliotwu-7/Mac-Coffee?style=flat-square)](https://github.com/Elliotwu-7/Mac-Coffee/releases)
