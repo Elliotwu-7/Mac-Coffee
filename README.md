@@ -54,6 +54,14 @@ Mac Coffee is a lightweight native utility for macOS that lets you switch betwee
 3. Drag `Mac Coffee.app` into `Applications`.
 4. Launch `Mac Coffee.app` from `Applications`.
 
+If macOS says the app is "damaged" or cannot be opened, that is usually Gatekeeper blocking an unsigned build. You can remove the quarantine flag and try again:
+
+```sh
+sudo xattr -rd com.apple.quarantine /Applications/"Mac Coffee.app"
+```
+
+You can also open `System Settings > Privacy & Security`, then allow the blocked app and relaunch it.
+
 ### Build from source
 
 Requirements:
