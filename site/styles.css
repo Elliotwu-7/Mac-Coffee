@@ -2254,6 +2254,34 @@ button {
   }
 }
 
+body { background: var(--ink); }
+body::before { display: none; }
+body .nav { min-height: 64px; }
+body .hero { min-height: 0; padding-block: 40px 48px; gap: 36px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+body .hero h1 { margin: 18px 0; font-size: clamp(2.2rem, 3.8vw, 3.5rem); line-height: 1.14; letter-spacing: -.025em; }
+body .hero-lede { font-size: 1rem; line-height: 1.65; }
+body .hero-actions { margin-top: 22px; }
+body .hero-trust { margin-top: 20px; }
+body .eyebrow, body .section-index { font-size: 12px; letter-spacing: .07em; }
+body .pain-section, body .features-section, body .safety-section, body .mcp-section, body .architecture-section, body .final-cta { padding-block: 48px; }
+body .section-heading { margin-bottom: 28px; gap: 20px 36px; }
+body .section-heading .section-index { margin-bottom: 0; }
+body .section-heading h2, body .section-heading-compact h2 { font-size: clamp(1.8rem, 2.8vw, 2.6rem); line-height: 1.2; letter-spacing: -.025em; }
+body .section-heading p { font-size: 1rem; line-height: 1.65; }
+body .cta-card { min-height: 0; padding: 36px 24px; border-radius: 16px; }
+body .cta-card > img { width: 56px; height: 56px; margin-bottom: 16px; }
+body .cta-card h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); line-height: 1.2; letter-spacing: -.025em; }
+body .button { min-height: 44px; border-radius: 8px; }
+@media (max-width: 900px) {
+  body .hero { grid-template-columns: 1fr; gap: 28px; }
+  body .section-heading { grid-template-columns: 1fr; gap: 14px; }
+}
+@media (max-width: 560px) {
+  body .hero { padding-block: 28px; }
+  body .hero h1 { font-size: 2.2rem; }
+  body .pain-section, body .features-section, body .safety-section, body .mcp-section, body .architecture-section, body .final-cta { padding-block: 32px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

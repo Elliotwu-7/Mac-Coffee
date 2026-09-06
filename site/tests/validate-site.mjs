@@ -39,7 +39,7 @@ for (const asset of ["assets/app-icon.png", "assets/panel-en.png", "assets/setti
 }
 
 for (const phrase of [
-  "Keep your Mac awake",
+  "Timed wake sessions for your Mac.",
   "brew tap rekurt/maccoffee",
   "brew install --cask maccoffee",
   "maccoffee_set_session",
@@ -67,6 +67,8 @@ vm.runInNewContext(readFileSync(join(siteRoot, "i18n.js"), "utf8"), context);
 const translations = context.MacCoffeeTranslations;
 assert.ok(translations?.en && translations?.ru, "English and Russian dictionaries are required");
 assert.deepEqual(Object.keys(translations.ru).sort(), Object.keys(translations.en).sort(), "Language keys differ");
+assert.ok(translations.zh, "Simplified Chinese dictionary is required");
+assert.deepEqual(Object.keys(translations.zh).sort(), Object.keys(translations.en).sort(), "Chinese language keys differ");
 
 const keys = [
   ...html.matchAll(/data-i18n(?:-aria)?="([^"]+)"/g),
@@ -74,6 +76,7 @@ const keys = [
 for (const key of new Set(keys)) {
   assert.ok(key in translations.en, `Missing English translation for ${key}`);
   assert.ok(key in translations.ru, `Missing Russian translation for ${key}`);
+  assert.ok(key in translations.zh, `Missing Chinese translation for ${key}`);
 }
 
 new vm.Script(readFileSync(join(siteRoot, "script.js"), "utf8"));

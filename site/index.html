@@ -8,17 +8,17 @@
     <link rel="canonical" href="https://rekurt.github.io/Mac-Coffee/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://rekurt.github.io/Mac-Coffee/">
-    <meta property="og:title" content="Mac Coffee — Keep your Mac awake">
+    <meta property="og:title" content="Mac Coffee — Timed wake sessions for macOS">
     <meta property="og:description" content="Native macOS wake control with timed sessions, battery protection, and optional local MCP control.">
     <meta property="og:image" content="https://rekurt.github.io/Mac-Coffee/assets/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Mac Coffee keeps three AI agents running with an active wake session">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Mac Coffee — Keep your Mac awake">
+    <meta name="twitter:title" content="Mac Coffee — Timed wake sessions for macOS">
     <meta name="twitter:description" content="Native macOS wake control with timed sessions, battery protection, and optional local MCP control.">
     <meta name="twitter:image" content="https://rekurt.github.io/Mac-Coffee/assets/og.png">
-    <title>Mac Coffee — Keep your Mac awake</title>
+    <title>Mac Coffee — Timed wake sessions for macOS</title>
     <link rel="icon" href="assets/app-icon.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -44,6 +44,7 @@
           <div class="language-switch" role="group" aria-label="Language" data-i18n-aria="languageLabel">
             <button type="button" data-language="en" aria-pressed="true">EN</button>
             <button type="button" data-language="ru" aria-pressed="false">RU</button>
+            <button type="button" data-language="zh" aria-pressed="false">中文</button>
           </div>
           <a class="button button-small button-primary" href="#install" data-i18n="navInstall">Install</a>
         </div>
@@ -54,8 +55,8 @@
       <section class="hero shell" id="top" aria-labelledby="hero-title">
         <div class="hero-copy" data-reveal>
           <div class="eyebrow"><span class="eyebrow-dot"></span><span data-i18n="heroEyebrow">Native macOS menu bar app</span></div>
-          <h1 id="hero-title" data-i18n="heroTitle">Keep your Mac awake when you need it.</h1>
-          <p class="hero-lede" data-i18n="heroBody">Run timed or indefinite wake sessions without changing permanent power settings.</p>
+          <h1 id="hero-title" data-i18n="heroTitle">Timed wake sessions for your Mac.</h1>
+          <p class="hero-lede" data-i18n="heroBody">Keep builds, downloads, and local agents running during idle time. Choose a timer and a battery cutoff from the menu bar.</p>
           <div class="hero-actions">
             <button class="button button-primary" type="button" data-copy="#brew-install" data-i18n-aria="copyInstallLabel">
               <span data-copy-label data-i18n="heroPrimary">Copy Homebrew command</span>
@@ -81,17 +82,17 @@
           <div class="console-chrome">
             <div class="traffic-lights" aria-hidden="true"><span></span><span></span><span></span></div>
             <span class="console-title">agent-ops.local</span>
-            <span class="console-live"><i></i><span data-i18n="consoleLive">LIVE</span></span>
+            <span class="console-live"><i></i><span data-i18n="consoleLive">DEMO</span></span>
           </div>
 
           <div class="console-body">
             <div class="console-summary">
               <div>
-                <span class="console-kicker" data-i18n="consoleKicker">LOCAL WORKLOAD</span>
+                <span class="console-kicker" data-i18n="consoleKicker">EXAMPLE WORKLOAD</span>
                 <strong data-i18n="consoleTitle">3 agents in progress</strong>
               </div>
               <div class="risk-badge risk-only"><span aria-hidden="true">!</span><span data-i18n="riskBadge">SLEEP RISK</span></div>
-              <div class="safe-badge safe-only"><span aria-hidden="true">✓</span><span data-i18n="safeBadge">PROTECTED</span></div>
+              <div class="safe-badge safe-only"><span aria-hidden="true">✓</span><span data-i18n="safeBadge">SESSION ACTIVE</span></div>
             </div>
 
             <div class="agent-list" aria-label="Running agents" data-i18n-aria="agentListLabel">
@@ -125,8 +126,8 @@
             </div>
 
             <button class="wake-toggle" id="wake-toggle" type="button" aria-pressed="false">
-              <span class="risk-only"><span aria-hidden="true">☕</span><span data-i18n="protectRun">Protect this run with Mac Coffee</span></span>
-              <span class="safe-only"><span aria-hidden="true">✓</span><span data-i18n="runProtected">Run protected — Mac stays awake</span></span>
+              <span class="risk-only"><span aria-hidden="true">☕</span><span data-i18n="protectRun">Start an example wake session</span></span>
+              <span class="safe-only"><span aria-hidden="true">✓</span><span data-i18n="runProtected">Wake session active</span></span>
             </button>
           </div>
         </div>
@@ -144,8 +145,8 @@
       <section class="pain-section shell" aria-labelledby="pain-title">
         <div class="section-heading" data-reveal>
           <span class="section-index" data-i18n="sectionProblem">01 / THE PROBLEM</span>
-          <h2 id="pain-title" data-i18n="painTitle">The best agent run is the one that finishes.</h2>
-          <p data-i18n="painBody">A laptop that sleeps mid-task can interrupt terminals, local MCP servers, network work, builds, and test suites. Mac Coffee keeps the machine available without changing permanent system power settings.</p>
+          <h2 id="pain-title" data-i18n="painTitle">Idle sleep can interrupt local work.</h2>
+          <p data-i18n="painBody">Builds, downloads, and local agents may pause or lose connections when a laptop sleeps. Start a wake session before leaving a task running.</p>
         </div>
         <div class="before-after" data-reveal>
           <article class="scenario-card scenario-before">
@@ -153,7 +154,7 @@
             <div class="scenario-line"><span>22:14:02</span><code>agent.run()</code><b data-i18n="logStarted">started</b></div>
             <div class="scenario-line"><span>22:31:44</span><code>system.idle</code><b data-i18n="logDetected">detected</b></div>
             <div class="scenario-line is-error"><span>22:33:26</span><code>connection</code><b data-i18n="logLost">lost</b></div>
-            <p data-i18n="beforeBody">You return to a disconnected session and an unfinished task.</p>
+            <p data-i18n="beforeBody">Idle sleep can interrupt the task or its network connection.</p>
           </article>
           <div class="scenario-arrow" aria-hidden="true">→</div>
           <article class="scenario-card scenario-after">
@@ -161,7 +162,7 @@
             <div class="scenario-line"><span>22:14:02</span><code>agent.run()</code><b data-i18n="logStarted">started</b></div>
             <div class="scenario-line"><span>22:14:03</span><code>wake.session</code><b data-i18n="logActive">active</b></div>
             <div class="scenario-line is-safe"><span>23:08:17</span><code>agent.result</code><b data-i18n="logComplete">complete</b></div>
-            <p data-i18n="afterBody">You return to completed work, with battery protection still in control.</p>
+            <p data-i18n="afterBody">The wake session prevents idle sleep until its timer or battery cutoff ends it.</p>
           </article>
         </div>
       </section>
@@ -169,15 +170,15 @@
       <section class="features-section shell" id="features" aria-labelledby="features-title">
         <div class="section-heading" data-reveal>
           <span class="section-index" data-i18n="sectionProduct">02 / PRODUCT</span>
-          <h2 id="features-title" data-i18n="featuresTitle">Precise control. Native boundaries.</h2>
-          <p data-i18n="featuresBody">Everything needed to keep work alive, nothing that turns a small utility into a background platform.</p>
+          <h2 id="features-title" data-i18n="featuresTitle">Set the mode, duration, and battery cutoff.</h2>
+          <p data-i18n="featuresBody">Control wake sessions from the menu bar. Settings apply to the current session.</p>
         </div>
 
         <div class="feature-grid">
           <article class="feature-card feature-primary" data-reveal>
             <div class="feature-copy">
               <span class="feature-number">01</span>
-              <h3 data-i18n="modesTitle">Two wake modes, one clear state</h3>
+              <h3 data-i18n="modesTitle">System and display wake modes</h3>
               <p data-i18n="modesBody">Keep the Mac awake while allowing the display to sleep, or keep both system and display awake. Off releases every assertion.</p>
               <div class="mode-pills"><span data-i18n="modeSystem">Keep Mac Awake</span><span data-i18n="modeDisplay">Keep Display Awake</span><span data-i18n="modeOff">Off</span></div>
             </div>
@@ -190,7 +191,7 @@
           <article class="feature-card" data-reveal>
             <span class="feature-icon" aria-hidden="true">◷</span>
             <span class="feature-number">02</span>
-            <h3 data-i18n="durationTitle">A session that fits the work</h3>
+            <h3 data-i18n="durationTitle">Timed or indefinite sessions</h3>
             <p data-i18n="durationBody">Choose 30 minutes, 1, 2, 4, or 8 hours — or run indefinitely. Changing duration updates the active session immediately.</p>
             <div class="duration-track" aria-hidden="true"><span>30m</span><span>1h</span><span class="selected">2h</span><span>4h</span><span>8h</span><span>∞</span></div>
           </article>
@@ -199,14 +200,14 @@
             <span class="feature-icon" aria-hidden="true">▰</span>
             <span class="feature-number">03</span>
             <h3 data-i18n="batteryTitle">Battery protection</h3>
-            <p data-i18n="batteryBody">Set a cutoff from 10% to 30%. The safe 15% default and hysteresis stop wake sessions before low power becomes a problem.</p>
+            <p data-i18n="batteryBody">Choose a cutoff from 10% to 30%, with 15% as the default. A session stops when the battery reaches the threshold.</p>
             <div class="battery-visual"><span style="--level: 72%"></span><strong>72%</strong></div>
           </article>
 
           <article class="feature-card" data-reveal>
             <span class="feature-icon" aria-hidden="true">↗</span>
             <span class="feature-number">04</span>
-            <h3 data-i18n="loginTitle">Ready when you log in</h3>
+            <h3 data-i18n="loginTitle">Launch at Login</h3>
             <p data-i18n="loginBody">Native Launch at Login through SMAppService, with no privileged helper and no persistent pmset changes.</p>
             <div class="toggle-demo"><span data-i18n="launchLogin">Launch at Login</span><i aria-hidden="true"></i></div>
           </article>
@@ -222,8 +223,8 @@
           <article class="feature-card" data-reveal>
             <span class="feature-icon" aria-hidden="true">◎</span>
             <span class="feature-number">06</span>
-            <h3 data-i18n="nativeTitle">Feels at home on macOS</h3>
-            <p data-i18n="nativeBody">A focused SwiftUI menu-bar app with local notifications, VoiceOver labels, runtime localization, and gentle Direct-build updates.</p>
+            <h3 data-i18n="nativeTitle">Menu bar controls and notifications</h3>
+            <p data-i18n="nativeBody">SwiftUI controls, local notifications, VoiceOver labels, and language switching. The Direct build also checks for updates.</p>
             <div class="native-tags"><span>SwiftUI</span><span>VoiceOver</span><span>Sparkle</span></div>
           </article>
         </div>
@@ -233,13 +234,13 @@
         <div class="shell">
           <div class="section-heading section-heading-light" data-reveal>
             <span class="section-index" data-i18n="sectionAutomation">03 / AUTOMATION</span>
-            <h2 id="mcp-title" data-i18n="mcpTitle">Give your agents control of the thing that keeps them alive.</h2>
-            <p data-i18n="mcpBody">The Direct build includes an optional local MCP server for Codex, Claude Desktop, and any stdio client. It is off by default, pairs explicitly, and never launches Mac Coffee behind your back.</p>
+            <h2 id="mcp-title" data-i18n="mcpTitle">Start and stop wake sessions through MCP.</h2>
+            <p data-i18n="mcpBody">The Direct build includes an optional local MCP server for Codex, Claude Desktop, and other stdio clients. Enable it in Settings and approve each new client.</p>
           </div>
 
           <div class="mcp-layout">
             <div class="setup-steps" data-reveal>
-              <div class="setup-header"><span data-i18n="setupTitle">Five steps. Fully local.</span><b>≈ 60 sec</b></div>
+              <div class="setup-header"><span data-i18n="setupTitle">Connect an MCP client</span><b>≈ 60 sec</b></div>
               <ol>
                 <li><span>01</span><div><strong data-i18n="setupOneTitle">Install the Direct build</strong><p data-i18n="setupOneBody">Launch Mac Coffee once so the local app endpoint is available.</p></div></li>
                 <li><span>02</span><div><strong data-i18n="setupTwoTitle">Open Settings → AI & automation</strong><p data-i18n="setupTwoBody">Enable MCP, then choose Set up an MCP client.</p></div></li>
@@ -291,8 +292,8 @@ command = <span class="code-string">"/Applications/Mac Coffee.app/Contents/Helpe
       <section class="safety-section shell" id="security" aria-labelledby="security-title">
         <div class="section-heading" data-reveal>
           <span class="section-index" data-i18n="sectionTrust">04 / TRUST</span>
-          <h2 id="security-title" data-i18n="securityTitle">Powerful enough for automation. Bounded by design.</h2>
-          <p data-i18n="securityBody">Mac Coffee prevents idle sleep only. You and macOS keep authority over every safety-critical decision.</p>
+          <h2 id="security-title" data-i18n="securityTitle">Idle sleep control with macOS limits.</h2>
+          <p data-i18n="securityBody">Manual sleep, lid closure, and macOS safety mechanisms still apply during a wake session.</p>
         </div>
 
         <div class="safety-layout">
@@ -320,8 +321,8 @@ command = <span class="code-string">"/Applications/Mac Coffee.app/Contents/Helpe
         <div class="shell">
           <div class="section-heading section-heading-compact" data-reveal>
             <span class="section-index" data-i18n="sectionUnderHood">05 / UNDER THE HOOD</span>
-            <h2 id="architecture-title" data-i18n="architectureTitle">A local path you can reason about.</h2>
-            <p data-i18n="architectureBody">No daemon maze and no privileged helper. The Direct build connects your stdio client to the running app through narrow, validated boundaries.</p>
+            <h2 id="architecture-title" data-i18n="architectureTitle">From your MCP client to the running app.</h2>
+            <p data-i18n="architectureBody">The Direct build routes stdio requests through a local XPC broker. The connection is limited to the current macOS user and needs no privileged helper.</p>
           </div>
           <div class="architecture-flow" data-reveal>
             <div><span>01</span><strong data-i18n="archClient">AI client</strong><code>Codex / Claude</code></div><b aria-hidden="true">→</b>
@@ -343,7 +344,7 @@ command = <span class="code-string">"/Applications/Mac Coffee.app/Contents/Helpe
           <div class="cta-glow" aria-hidden="true"></div>
           <img src="assets/app-icon.png" alt="Mac Coffee application icon" width="128" height="128" loading="lazy">
           <span class="section-index" data-i18n="ctaEyebrow">MACOS 13 OR LATER</span>
-          <h2 id="cta-title" data-i18n="ctaTitle">Install Mac Coffee and choose a wake session.</h2>
+          <h2 id="cta-title" data-i18n="ctaTitle">Install and start a session.</h2>
           <p data-i18n="ctaBody">Install with Homebrew or download the signed and notarized DMG.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="#install"><span data-i18n="ctaPrimary">Install with Homebrew</span><span aria-hidden="true">↑</span></a>
@@ -357,7 +358,7 @@ command = <span class="code-string">"/Applications/Mac Coffee.app/Contents/Helpe
     <footer class="site-footer">
       <div class="shell footer-grid">
         <a class="brand" href="#top"><img src="assets/app-icon.png" alt="" width="32" height="32"><span>Mac Coffee</span></a>
-        <p data-i18n="footerBody">Native wake control for work that takes time.</p>
+        <p data-i18n="footerBody">Timed idle-sleep control for macOS.</p>
         <div><a href="https://github.com/rekurt/Mac-Coffee/blob/main/PRIVACY.md" target="_blank" rel="noopener noreferrer" data-i18n="footerPrivacy">Privacy</a><a href="https://github.com/rekurt/Mac-Coffee/blob/main/docs/SECURITY.md" target="_blank" rel="noopener noreferrer" data-i18n="footerSecurity">Security</a><a href="https://github.com/rekurt/Mac-Coffee" target="_blank" rel="noopener noreferrer">GitHub</a></div>
       </div>
     </footer>
