@@ -1,124 +1,162 @@
-<h1 align="center">
-  <a href="https://github.com/Elliotwu-7/Mac-Coffee">
-    <img src="docs/images/logo.png" alt="Mac Coffee logo" width="100" height="100">
-  </a>
-</h1>
+# Mac Coffee
 
-<div align="center">
-  Mac Coffee
-  <br />
-  A native macOS menu bar app that keeps your Mac awake, restores normal sleep on a schedule, and safely falls back when your Mac switches to battery power.
-  <br />
-  <br />
-  <div align="center">
-<p align="center">
-  <a href="https://linux.do" alt="LINUX DO">
-    <img src="https://shorturl.at/ggSqS" alt="LINUX DO">
-  </a>
-</p>
-  <a href="README.zh-CN.md">中文文档</a>
-  ·
-  <a href="https://github.com/Elliotwu-7/Mac-Coffee/releases">Download DMG</a>
-  ·
-  <a href="https://github.com/Elliotwu-7/Mac-Coffee/issues/new?assignees=&labels=bug&template=01_BUG_REPORT.md&title=bug%3A+">Report a Bug</a>
-  ·
-  <a href="https://github.com/Elliotwu-7/Mac-Coffee/issues/new?assignees=&labels=enhancement&template=02_FEATURE_REQUEST.md&title=feat%3A+">Request a Feature</a>
-</div>
+A native macOS menu bar app that prevents idle sleep.
 
+**English** · [Русский](README.ru.md) · [简体中文](README.zh-Hans.md)
 
-  <br />
+| Wake session | Settings |
+| --- | --- |
+| ![Active wake session](docs/images/panel-en.png) | ![Settings in Russian](docs/images/settings-ru.png) |
 
-[![Project license](https://img.shields.io/github/license/Elliotwu-7/Mac-Coffee.svg?style=flat-square)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/Elliotwu-7/Mac-Coffee?style=flat-square)](https://github.com/Elliotwu-7/Mac-Coffee/releases)
-[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/Elliotwu-7/Mac-Coffee/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
+Mac Coffee uses process-owned IOKit power assertions. It does not install a privileged helper, change `pmset`, collect analytics, or use a backend. Assertions are released when a session ends or the app exits.
 
-</div>
+[Project website](https://rekurt.github.io/Mac-Coffee/) · [All projects by rekurt](https://rekurt.github.io/projects/)
 
-## About
+## Install
 
-Mac Coffee is a lightweight native utility for macOS that lets you switch between a "keep awake" mode and the system's normal sleep behavior without touching Terminal. It is built for the everyday cases where you want a simple menu bar toggle, but still want sensible guardrails like timed recovery, a battery safety switch, and login startup support.
+Mac Coffee requires macOS 13 Ventura or later.
 
-## Screenshot
-
-![Mac Coffee screenshot](docs/images/screenshot.png)
-
-## Features
-
-- Native menu bar experience with a compact status area and clean context menu
-- Toggle between keep-awake mode and normal sleep in one click
-- Restore normal sleep after a preset duration or at a chosen date and time
-- Optionally restore sleep immediately when the Mac starts running on battery
-- Login-at-startup toggle
-- One-time privileged helper installation so future toggles do not keep prompting for a password
-
-## Installation
-
-### Download the app
-
-1. Download `MacCoffee.dmg` from the latest [GitHub release](https://github.com/Elliotwu-7/Mac-Coffee/releases).
-2. Open the DMG.
-3. Drag `Mac Coffee.app` into `Applications`.
-4. Launch `Mac Coffee.app` from `Applications`.
-
-If macOS says the app is "damaged" or cannot be opened, that is usually Gatekeeper blocking an unsigned build. You can remove the quarantine flag and try again:
+### Homebrew
 
 ```sh
-sudo xattr -rd com.apple.quarantine /Applications/"Mac Coffee.app"
+brew tap rekurt/maccoffee
+brew install --cask maccoffee
 ```
 
-You can also open `System Settings > Privacy & Security`, then allow the blocked app and relaunch it.
+### DMG
 
-### Build from source
-
-Requirements:
-
-- macOS 13 or later
-- Xcode Command Line Tools (`xcode-select --install`)
-- Administrator approval on first use to install the helper
-
-```sh
-cd /Users/elliotwu/MacCoffee
-chmod +x build.sh install.sh package_dmg.sh
-./build.sh
-./install.sh
-```
-
-To build a DMG locally:
-
-```sh
-./package_dmg.sh
-open dist/MacCoffee.dmg
-```
+Download the signed and notarized DMG from the [latest release](https://github.com/rekurt/Mac-Coffee/releases/latest), open it, and move Mac Coffee to Applications.
 
 ## Usage
 
-Mac Coffee lives in the menu bar and is designed to stay out of the way:
+1. Open the coffee cup menu bar item.
+2. Select **Keep Mac Awake** or **Keep Display Awake**.
+3. Select a duration: 30 minutes, 1, 2, 4, or 8 hours, or indefinitely.
+4. Select **Off** to end the session.
 
-- Turn keep-awake mode on when you need your Mac to stay active
-- Choose a timer or a specific date and time to return to normal sleep
-- Enable battery protection if you want Mac Coffee to immediately restore sleep when AC power is removed
-- Enable launch at login if you want the utility available after every boot
+Settings include a 10–30% battery cutoff, Launch at Login, notifications, update checks, language selection, and MCP configuration. The default battery cutoff is 15%.
 
-On the first toggle, macOS will ask for administrator approval to install the helper. Once installed, later toggles should work without repeated password prompts unless the helper is removed.
+The interface is available in English, Russian, German, French, Simplified Chinese, Japanese, Korean, and Spanish. VoiceOver labels are included.
 
-## Release automation
+Mac Coffee prevents idle sleep only. Manual sleep, lid closure, shutdown, restart, thermal protection, and other macOS safety mechanisms still apply.
 
-This repository includes a GitHub Actions workflow that automatically builds the app and uploads `MacCoffee.dmg` whenever a tag like `v1.0.1` is pushed.
+## Local MCP server
+
+The Direct build includes an optional stdio MCP server for Codex, Claude Desktop, and other MCP clients. It is disabled by default.
+
+Enable it under **Settings → AI & automation**, then use the setup wizard to review and install the client configuration. Clients must pair with a running Mac Coffee instance. Credentials are stored in Keychain, and connections are limited to the current macOS user.
+
+Tools:
+
+- `maccoffee_get_status`
+- `maccoffee_set_session`
+- `maccoffee_stop_session`
+- `maccoffee_set_battery_threshold`
+- `maccoffee_set_launch_at_login`
+- `maccoffee_set_language`
+
+Resources:
+
+- `maccoffee://status`
+- `maccoffee://capabilities`
+- `maccoffee://activity`
+
+See [MCP setup and security](docs/MCP.md) for configuration examples, schemas, and troubleshooting.
+
+## Build from source
+
+A source build requires Xcode and the tools listed in the [`Brewfile`](Brewfile).
+
+```sh
+brew bundle
+./scripts/build-local.sh direct
+open "dist/local/Mac Coffee.app"
+```
+
+The local build is ad hoc signed and intended for testing on the current Mac.
+
+Run the test suite:
+
+```sh
+DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer \
+  xcodebuild test \
+  -project MacCoffee.xcodeproj \
+  -scheme MacCoffeeTests \
+  -destination 'platform=macOS' \
+  CODE_SIGNING_ALLOWED=NO
+```
+
+Build and verify both distribution variants:
+
+```sh
+xcodegen generate
+./scripts/build-local.sh direct
+./scripts/build-local.sh app-store
+./scripts/verify-release-assets.sh
+./scripts/verify-bundles.sh
+```
+
+XCUITests require an unlocked interactive desktop.
+
+## Project structure
+
+| Component | Purpose | Distribution |
+| --- | --- | --- |
+| `MacCoffeeCore` | Power assertions, preferences, localization, and shared UI | Direct |
+| `MacCoffeeAppStoreCore` | Store-safe core without MCP symbols | App Store |
+| `MacCoffeeDirect` | Direct app, Sparkle updates, and MCP lifecycle | Direct |
+| `MacCoffeeMCP` | Embedded stdio MCP helper | Direct |
+| `MacCoffeeMCPBroker` | XPC broker between the helper and the running app | Direct |
+| `MacCoffeeAppStore` | Sandboxed App Store app without Sparkle or MCP | App Store |
+| `MacCoffeeScreenshots` | Deterministic App Store screenshot renderer | Development only |
+
+Wake sessions use `IOPMAssertionCreateWithName`. Battery changes come from IOPowerSources notifications rather than polling.
+
+Detailed documentation:
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [Privacy policy](PRIVACY.md)
+- [Security](docs/SECURITY.md)
+- [App Store submission](docs/APP_STORE_SUBMISSION.md)
+
+## Release
+
+Create a signed and notarized Direct release:
+
+```sh
+./scripts/release-direct.sh
+```
+
+The script requires a Developer ID certificate, notarization credentials, an HTTPS appcast URL, and a Sparkle EdDSA public key.
+
+Create an App Store archive:
+
+```sh
+MACCOFFEE_APP_STORE_TEAM=YOUR_TEAM_ID ./scripts/archive-app-store.sh
+```
+
+The App Store build does not contain Sparkle, the MCP helper, or the MCP broker. See the [release checklist](docs/RELEASE_CHECKLIST.md) before publishing a build.
+
+App Store screenshots are generated from production SwiftUI views:
+
+```sh
+./scripts/generate-screenshots.sh
+```
+
+## Privacy and security
+
+Mac Coffee does not collect personal data. The Direct build connects only to the configured Sparkle appcast for update checks. MCP traffic stays on the local Mac and its activity log is kept in memory with a fixed size limit.
+
+Report vulnerabilities using the [security policy](docs/SECURITY.md). Use [GitHub Issues](https://github.com/rekurt/Mac-Coffee/issues) for bugs and support requests.
+
+## Upgrading from 1.x
+
+Version 2.0 does not install or call the privileged helper used by 1.x. If an older version was installed, follow the [legacy cleanup guide](docs/LEGACY_CLEANUP.md). Cleanup requires explicit administrator approval and never runs automatically.
 
 ## Contributing
 
-Issues, ideas, and pull requests are all welcome. Please check [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) if you want to contribute.
+See [Contributing](docs/CONTRIBUTING.md) and the [Code of Conduct](docs/CODE_OF_CONDUCT.md).
 
-## Security
+Mac Coffee is licensed under the [MIT License](LICENSE).
 
-Mac Coffee is provided **as is** without warranty. If you discover a security issue, please follow the process described in [docs/SECURITY.md](docs/SECURITY.md).
-
-## License
-
-This project is released under the [MIT License](LICENSE).
-
-## Thanks
-
-- [dec0dOS/amazing-github-template](https://github.com/dec0dOS/amazing-github-template)
-- Apple's macOS developer tools and system frameworks
-- Thanks to the [Linux.do](https://linux.do/) community for feedback, discussion, and early support
+Forked from [Elliotwu-7/Mac-Coffee](https://github.com/Elliotwu-7/Mac-Coffee).

@@ -1,0 +1,2 @@
+[mcp_servers.mac_coffee]
+command = "/tmp/untrusted-helper"

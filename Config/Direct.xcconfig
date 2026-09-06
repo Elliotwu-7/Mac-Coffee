@@ -1,0 +1,10 @@
+#include "Shared.xcconfig"
+
+PRODUCT_BUNDLE_IDENTIFIER = com.rekurt.maccoffee.direct
+PRODUCT_BUNDLE_IDENTIFIER[config=Debug] = com.rekurt.maccoffee.direct.debug
+PRODUCT_NAME = Mac Coffee
+INFOPLIST_FILE = Resources/Direct/Info.plist
+CODE_SIGN_ENTITLEMENTS = Config/Direct.entitlements
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon
+MACCOFFEE_APPCAST_URL = https:/$()/github.com/rekurt/Mac-Coffee/releases/latest/download/appcast.xml
+MACCOFFEE_SPARKLE_PUBLIC_KEY =

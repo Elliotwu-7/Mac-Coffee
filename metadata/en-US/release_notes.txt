@@ -1,0 +1,1 @@
+Mac Coffee 2.0.2 improves the local MCP server's reliability and security. It hardens client configuration validation, pairing and broker recovery, request replay protection, and Launch at Login migration.

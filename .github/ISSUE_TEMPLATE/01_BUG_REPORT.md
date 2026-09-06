@@ -1,37 +1,34 @@
 ---
-name: Bug Report
-about: Create a report to help Mac Coffee to improve
+name: Bug report
+about: Report reproducible Mac Coffee behavior
 title: "bug: "
-labels: "bug"
+labels: bugfix
 assignees: ""
 ---
 
-# Bug Report
+## Environment
 
-**Mac Coffee version:**
+- Mac Coffee version or commit:
+- macOS version:
+- Mac model/architecture:
+- Edition: Direct / App Store / local build
+- Interface language:
+- Power source: battery / AC
 
-<!-- Please specify commit or tag version. -->
+## What happened
 
-**Current behavior:**
+<!-- Describe the observed and expected behavior. -->
 
-<!-- Describe how the bug manifests. -->
+## Steps to reproduce
 
-**Expected behavior:**
+1.
+2.
+3.
 
-<!-- Describe what you expect the behavior to be without the bug. -->
+## Diagnostics
 
-**Steps to reproduce:**
+<!-- Attach screenshots and relevant Console excerpts. Remove credentials and unrelated personal data. -->
 
-<!-- Explain the steps required to duplicate the issue, especially if you are able to provide a sample application. -->
+## Safety check
 
-**Related code:**
-
-<!-- If you are able to illustrate the bug or feature request with an example, please provide it here. -->
-
-```
-insert short code snippets here
-```
-
-**Other information:**
-
-<!-- List any other information that is relevant to your issue. Related issues, suggestions on how to fix, Stack Overflow links, forum links, etc. -->
+After selecting Off or quitting, does `pmset -g assertions` still show a Mac Coffee assertion? Yes / No / Not checked

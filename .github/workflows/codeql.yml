@@ -1,20 +1,60 @@
----
 name: CodeQL
 
 on:
   push:
+    branches: [main, "feat/**"]
   pull_request:
   schedule:
     - cron: "30 1 * * 0"
 
+permissions:
+  contents: read
+  security-events: write
+
 jobs:
-  codeql:
-    name: 🏭 Scanning
-    runs-on: ubuntu-latest
+  analyze-swift:
+    name: Analyze Swift
+    runs-on: macos-15
+    env:
+      DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
     steps:
-      - name: ⤵️ Check out code from GitHub
-        uses: actions/checkout@v2
-      - name: 🏗 Initialize CodeQL
-        uses: github/codeql-action/init@v1
-      - name: 🚀 Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v1
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install build tools
+        run: brew bundle
+
+      - name: Generate project
+        run: xcodegen generate
+
+      - name: Resolve packages
+        run: >-
+          xcodebuild -resolvePackageDependencies
+          -project MacCoffee.xcodeproj
+          -scheme MacCoffeeDirect
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: swift
+          build-mode: manual
+
+      - name: Build analyzed products
+        run: |
+          xcodebuild clean build \
+            -project MacCoffee.xcodeproj \
+            -scheme MacCoffeeDirect \
+            -configuration Release \
+            -destination 'platform=macOS' \
+            -disableAutomaticPackageResolution \
+            CODE_SIGNING_ALLOWED=NO
+          xcodebuild build \
+            -project MacCoffee.xcodeproj \
+            -scheme MacCoffeeAppStore \
+            -configuration Release \
+            -destination 'platform=macOS' \
+            -disableAutomaticPackageResolution \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@v4

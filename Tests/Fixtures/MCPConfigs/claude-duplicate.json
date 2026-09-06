@@ -1,0 +1,6 @@
+{
+  "mcpServers": {
+    "mac-coffee": { "command": "/tmp/one" },
+    "mac-coffee": { "command": "/tmp/two" }
+  }
+}

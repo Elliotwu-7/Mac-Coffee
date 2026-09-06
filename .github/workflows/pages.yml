@@ -1,0 +1,84 @@
+name: Deploy website to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  release:
+    types: [published]
+  workflow_dispatch:
+  schedule:
+    - cron: "31 */6 * * *"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+      - name: Check out family kit
+        uses: actions/checkout@v7
+        with:
+          repository: rekurt/rekurt.github.io
+          ref: main
+          path: family
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: family/go.mod
+          cache-dependency-path: family/go.sum
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
+      - name: Validate website
+        run: node site/tests/validate-site.mjs
+      - name: Stage website
+        run: |
+          mkdir _site
+          cp -R site/. _site
+      - name: Refresh public catalog
+        working-directory: family
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: go run ./cmd/catalog-sync sync --manifest catalog/projects.yaml --snapshot site/src/data/generated/catalog.json --audit docs/repository-audit.md
+      - name: Add project family navigation
+        working-directory: family
+        run: >-
+          go run ./cmd/project-site decorate
+          --slug mac-coffee
+          --snapshot site/src/data/generated/catalog.json
+          --repo ..
+          --out ../_site
+          --base-url "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+      - name: Validate decorated website
+        working-directory: family
+        run: >-
+          go run ./cmd/project-site validate
+          --slug mac-coffee
+          --snapshot site/src/data/generated/catalog.json
+          --repo ..
+          --out ../_site
+          --base-url "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+          include-hidden-files: true
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

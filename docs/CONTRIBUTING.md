@@ -1,53 +1,57 @@
 # Contributing
 
-Thanks for taking the time to contribute to Mac Coffee.
+Thank you for improving Mac Coffee. Participation is governed by the [Code of Conduct](CODE_OF_CONDUCT.md).
 
-Please note we have a [code of conduct](CODE_OF_CONDUCT.md), and we expect all contributors to follow it.
+## Development setup
 
-## Development environment setup
+```sh
+git clone https://github.com/rekurt/Mac-Coffee.git
+cd Mac-Coffee
+brew bundle
+xcodegen generate
+```
 
-1. Clone the repository:
+Requirements are macOS 13 or later, a full Xcode installation, Homebrew, and the build tools in [`Brewfile`](../Brewfile). `project.yml` enforces the minimum supported XcodeGen version.
 
-   ```sh
-   git clone https://github.com/Elliotwu-7/Mac-Coffee.git
-   cd Mac-Coffee
-   ```
+## Before opening a pull request
 
-2. Make sure Xcode Command Line Tools are available:
+```sh
+./scripts/verify-release-assets.sh
 
-   ```sh
-   xcode-select -p
-   ```
+DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer \
+  xcodebuild test \
+  -project MacCoffee.xcodeproj \
+  -scheme MacCoffeeTests \
+  -destination 'platform=macOS' \
+  CODE_SIGNING_ALLOWED=NO
 
-3. Build and install locally:
+./scripts/build-local.sh direct
+./scripts/build-local.sh app-store
+./scripts/verify-bundles.sh
+zsh -n scripts/*.sh
+```
 
-   ```sh
-   chmod +x build.sh install.sh package_dmg.sh
-   ./build.sh
-   ./install.sh
-   ```
+Run `MacCoffeeUITests` on an unlocked desktop for UI, accessibility, language, or quit-flow changes. Regenerate screenshots when user-visible copy or layout changes:
 
-4. If you are changing release packaging, generate a DMG before opening the PR:
+```sh
+./scripts/generate-screenshots.sh
+```
 
-   ```sh
-   ./package_dmg.sh
-   ```
+Keep pull requests focused. Explain behavior and distribution-boundary changes, include tests, and attach before/after screenshots for UI work. `project.yml` is authoritative; commit the generated Xcode project after running XcodeGen.
 
-## Issues and feature requests
+## Issues
 
-Found a bug, packaging issue, or UX problem? Please [open an issue](https://github.com/Elliotwu-7/Mac-Coffee/issues) and include:
+Search existing [issues](https://github.com/rekurt/Mac-Coffee/issues) before filing one. For bugs, include the Mac Coffee version or commit, macOS version, Mac architecture, Direct or App Store edition, active language, power source, expected behavior, exact reproduction steps, and relevant screenshots or Console excerpts with secrets removed.
 
-- macOS version
-- whether the machine was on battery or AC power
-- whether the privileged helper had already been installed
-- exact steps to reproduce
+Do not file vulnerabilities publicly. Follow the [security policy](SECURITY.md).
 
-## Pull requests
+## Commit and code expectations
 
-1. Fork the project
-2. Create a branch (`git checkout -b feat/my-change`)
-3. Commit using [Conventional Commits](https://www.conventionalcommits.org)
-4. Push your branch
-5. Open a pull request
+- Follow the existing Swift style and prefer small, explicit domain types.
+- Add a failing regression test before fixing a bug.
+- Preserve the Off-at-launch and guaranteed assertion-release invariants.
+- Keep Sparkle out of the App Store target.
+- Add every new user-visible string to all eight localization files and keep format placeholders identical.
+- Never commit signing certificates, provisioning profiles, notarization credentials, Sparkle private keys, or generated build products.
 
-Please keep pull requests focused and include testing notes when behavior changes.
+Conventional Commit subjects are encouraged but not mandatory; a clear, imperative subject and explainable diff are mandatory.

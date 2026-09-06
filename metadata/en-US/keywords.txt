@@ -1,0 +1,1 @@
+awake,sleep,display,menu bar,battery,timer,focus,utility

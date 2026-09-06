@@ -1,0 +1,9 @@
+#include "Shared.xcconfig"
+
+PRODUCT_BUNDLE_IDENTIFIER = com.rekurt.maccoffee
+PRODUCT_BUNDLE_IDENTIFIER[config=Debug] = com.rekurt.maccoffee.debug
+PRODUCT_NAME = Mac Coffee
+PRODUCT_NAME[config=Debug] = Mac Coffee App Store Test
+INFOPLIST_FILE = Resources/AppStore/Info.plist
+CODE_SIGN_ENTITLEMENTS = Config/AppStore.entitlements
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon

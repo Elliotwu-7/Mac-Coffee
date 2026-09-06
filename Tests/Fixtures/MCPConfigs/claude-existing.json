@@ -1,0 +1,11 @@
+{
+  "preferences": {
+    "theme": "dark"
+  },
+  "mcpServers": {
+    "filesystem": {
+      "command": "/usr/bin/filesystem",
+      "args": ["/tmp"]
+    }
+  }
+}

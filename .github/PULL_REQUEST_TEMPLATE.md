@@ -1,40 +1,34 @@
-<!--- Please provide a general summary of your changes in the title above -->
+## Summary
 
-## Pull Request type
+<!-- What changed, and why is this the smallest correct change? -->
 
-<!-- Please try to limit your pull request to one type; submit multiple pull requests if needed. -->
+## User-visible behavior
 
-Please check the type of change your PR introduces:
+<!-- Include before/after screenshots for interface changes. Write “None” when appropriate. -->
 
-- [ ] Bugfix
-- [ ] Feature
-- [ ] Code style update (formatting, renaming)
-- [ ] Refactoring (no functional changes, no API changes)
-- [ ] Build-related changes
-- [ ] Documentation content changes
-- [ ] Other (please describe):
+## Safety and distribution boundaries
 
-## What is the current behavior?
+- [ ] Wake assertions still start only after explicit user action and are released on Off/expiry/termination.
+- [ ] The App Store product remains sandboxed and contains no Sparkle or alternate updater.
+- [ ] No credential, profile, certificate, private key, build output, or user data is committed.
+- [ ] New user-visible strings are complete in all eight localizations with matching format placeholders.
+- [ ] Privacy, App Review notes, and metadata are updated if behavior or data handling changed.
 
-<!-- Please describe the current behavior that you are modifying, or link to a relevant issue. -->
+## Verification
 
-Issue Number: N/A
+<!-- Paste the exact commands and outcomes; distinguish local results from GitHub checks. -->
 
-## What is the new behavior?
+- [ ] `./scripts/verify-release-assets.sh`
+- [ ] `MacCoffeeTests`
+- [ ] Relevant `MacCoffeeUITests` on an unlocked desktop
+- [ ] Direct and App Store builds
+- [ ] `./scripts/verify-bundles.sh`
+- [ ] `zsh -n scripts/*.sh`
 
-<!-- Please describe the behavior or changes that are being added by this PR. -->
+## Risks and rollback
 
--
--
--
+<!-- Identify residual risk, untested hardware/account state, and the rollback path. -->
 
-## Does this introduce a breaking change?
+## Related issues
 
-- [ ] Yes
-- [ ] No
-
-<!-- If this does introduce a breaking change, please describe the impact and migration path for existing applications below. -->
-
-## Other information
-
-<!-- Any other information that is important to this PR, such as screenshots of how the component looks before and after the change. -->
+<!-- Use “Closes #…” when this PR should close an issue. -->

@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+
+jobs:
+  test-and-build:
+    runs-on: macos-15
+    env:
+      DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Dependency review
+        if: github.event_name == 'pull_request'
+        uses: actions/dependency-review-action@v4
+
+      - name: Install build tools
+        run: brew bundle
+
+      - name: Generate project
+        run: |
+          xcodegen generate
+          git diff --exit-code -- MacCoffee.xcodeproj
+
+      - name: Verify release assets
+        run: ./scripts/verify-release-assets.sh
+
+      - name: Unit tests
+        run: >-
+          xcodebuild test
+          -project MacCoffee.xcodeproj
+          -scheme MacCoffeeTests
+          -destination 'platform=macOS'
+          CODE_SIGNING_ALLOWED=NO
+
+      - name: MCP integration tests
+        run: >-
+          xcodebuild test
+          -project MacCoffee.xcodeproj
+          -scheme MacCoffeeIntegrationTests
+          -destination 'platform=macOS'
+          CODE_SIGNING_ALLOWED=NO
+
+      - name: Menu bar UI tests
+        timeout-minutes: 20
+        run: >-
+          xcodebuild test
+          -project MacCoffee.xcodeproj
+          -scheme MacCoffeeUITests
+          -destination 'platform=macOS'
+
+      - name: Build Direct target
+        run: ./scripts/build-local.sh direct
+
+      - name: Build App Store target
+        run: ./scripts/build-local.sh app-store
+
+      - name: Build deterministic screenshot target
+        run: >-
+          xcodebuild build
+          -project MacCoffee.xcodeproj
+          -scheme MacCoffeeScreenshots
+          -configuration Release
+          -destination 'platform=macOS'
+          CODE_SIGNING_ALLOWED=NO
+
+      - name: Verify distribution boundary
+        run: ./scripts/verify-bundles.sh
+
+      - name: Verify release script syntax
+        run: zsh -n scripts/*.sh
+
+      - name: Package local smoke-test DMG
+        run: ./scripts/package-dmg.sh
