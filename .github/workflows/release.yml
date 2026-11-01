@@ -17,7 +17,7 @@ jobs:
       MACCOFFEE_APPCAST_URL: ${{ secrets.MACCOFFEE_APPCAST_URL }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
 
       - name: Require release credentials
         env:
